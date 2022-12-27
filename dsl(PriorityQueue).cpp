@@ -1,3 +1,4 @@
+
 #include <iostream>
 using namespace std;
 template<class T>
@@ -82,7 +83,11 @@ int main(){
     Q.enQueue(I2) ;
     Q.enQueue(I3) ;
     Q.enQueue(I4) ;
+    Q.display();
+    cout<<"\n";
     Q.deQueue();
+    Q.display();
+    cout<<"\n";
     Q.deQueue();
     Q.display();
     return 0 ; 
