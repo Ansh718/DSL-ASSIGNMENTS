@@ -1,5 +1,5 @@
 # DSL-ASSIGNMENTS
-This assignments were created by me. Ihope these are useful to you.
+This assignments were created by me. I hope these are useful to you.
 Any suggestion would be really helpful.
 assignments are as follows
 1.Set
