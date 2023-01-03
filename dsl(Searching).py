@@ -1,103 +1,95 @@
-class Searching:
+class Search:
     def __init__(self,info):
         self.ls=info
-    def InsertionSort(self,myl):
+    def insertion_sort(self,myl):
         for i in range(len(self.ls)):
             j=i-1
-            while j>=0 and self.ls[j]>self.ls[i]:
+            while j>=0 and self.ls[i]<self.ls[j]:
                 self.ls[i],self.ls[j]=self.ls[j],self.ls[i]
                 i=i-1
                 j=j-1
         return self.ls
-    def LinearSearch(self):
-        req=int(input("Enter the roll number you are concerned with :-> "))
+    def linear_search(self):
+        t=int(input("WHICH ROLL NO. ARE YOU CONCERNED WITH?"))
         for i in range(len(self.ls)):
-            if req==self.ls[i]:
-                return (" "+str(req)," was present and at the position :-> "+str(i+1))
-        return (" "+str(req)," was not present.")
-    def SentinelSeaech(self):
-        req=int(input("Enter the roll number you are concerned with :-> "))
+            if t==self.ls[i]:
+                return('YES THIS STUDENT WAS PRESENT AND WAS AT',i+1,'POSITION')
+        return("NOT ATTENDED!")
+    def sentinal_search(self):
+        t=int(input("WHICH ROLL NO. ARE YOU CONCERNED WITH?"))
         last=self.ls[len(self.ls)-1]
-        self.ls[len(self.ls)-1]=req
+        self.ls[len(self.ls)-1]=t
         i=0
-        while(self.ls[i]!=req):
+        while(self.ls[i]!=t):
             i+=1
         self.ls[len(self.ls)-1]=last
-        if i<(len(self.ls)-1) or req==self.ls[len(self.ls)-1]:
-            return (" "+str(req)," was present and at the position :-> "+str(i+1))
+        if i<len(self.ls)-1 or t==self.ls[len(self.ls)-1]:
+            return('YES THIS STUDENT WAS PRESENT AND WAS AT',i+1,'POSITION')
         else:
-            return  (" "+str(req)," was not present.")
-    def BinarySearch(self):
-        req=int(input("Enter the roll number you are concerned with :-> "))
-        temp=self.InsertionSort(self.ls)
+            return("NOT ATTENDED!")
+    def binary_search(self):
+        t=int(input("WHICH ROLL NO. ARE YOU CONCERNED WITH?"))
+        t1=self.insertion_sort(self.ls)
         start=0
-        end=len(self.ls)-1
-        while start<=end:
+        end=len(t1)-1
+        while(start<=end):
             mid=(start+end)//2
-            if temp[mid]==req:
-                return (" "+str(req)," was present and at the position :-> "+str(mid+1))
-            elif temp[mid]>req:
+            if t1[mid]==t:
+                return('YES THIS STUDENT WAS PRESENT AND WAS AT',mid+1,'POSITION')
+            elif t1[mid]>t:
                 end=mid
             else:
                 start=mid+1
-        return  (" "+str(req)," was not present.")
-    def FibonacciSearch(self):
-        req=int(input("Enter the roll number you are concerned with :-> "))
-        temp=self.InsertionSort(self.ls)
-        f0=0
+        return('NOT ATTENDED!')
+    def fibonaccci_Search(self):
+        t1=int(input("GIVE THE CONCERNED NUMBER:"))
+        t=self.insertion_sort(self.ls)
+        # t.sort()
+        
+        size=len(t)
+        f0=0                                          
         f1=1
         f2=1
-        size=len(self.ls)
-        while f2<=size :
+        while(f2<=size):
             f0=f1
             f1=f2
             f2=f0+f1
-        offset=-1
-        while f2>1 :
-            ind=min(offset+f0,size-1)
-            if temp[ind]>req:
-                f2=f1
-                f1=f0
-                f0=f2-f1
-                offset=ind
-            elif temp[ind]<req:
-                f2=f0
-                f1=f1-f0
-                f0=f2-f1
+        s=-1
+        while(f2>1):
+            ind=min(s+f0,size-1)
+            if t[ind]<t1:
+                f2 = f1
+                f1 = f0
+                f0 = f2-f1
+                s = ind
+            elif t[ind]>t1:
+                f2 = f0
+                f1 = f1 - f0
+                f0 = f2 - f1
             else:
-                return (" "+str(req)," was present and at the position :-> "+str(ind+1))
-        if f1 and temp[size-1]==req:
-            return (" "+str(req)," was present and at the position :-> "+str(size))
-        return  (" "+str(req)," was not present.")
-while True:
-    chc=int(input("ENTER WHAT YOU WANT TO DO \n 1.TO GIVE THE INFO OF ROLL NUMBERS OF STUDENTS WHO ATTENDED \n 2.EXIT"))
-    if chc==2:
+                return ('YES THIS STUDENT WAS PRESENT AND WAS AT' ,ind+1,'POSITION')
+        if f1 and t[size-1]==t1:
+            return ('YES THIS STUDENT WAS PRESENT AND WAS AT' ,size-1,'POSITION')
+        return ('Not attended!!')
+while(True):
+    choice=int(input("ENTER WHAT YOU WANT TO DO \n 1.TO GIVE THE INFO OF ROLL NUMBERS OF STUDENTS WHO ATTENDED \n 2.EXIT"))
+    if choice==2:
         break
-    elif chc==1:
-        info=Searching(list(map(int,input("Enter the Roll Numbers of Students :-> ").split())))
-        while True:
-            chc=int(input("Enter your choice :-> \n 1.Linear Search \n 2.Sentinel Search \n 3.Binary Search \n 4.Fibonacci search \n 5.Exit"))
-            if chc==5:
+    elif choice==1:
+        info=Search(list(map(int,input("ENTER THE ROLL NUMBERS").split())))
+        while(True):
+            chc=int(input("ENTER YOUR ACTION : \n 1.LINEAR SEARCH \n 2.SENTINAL SEARCH \n 3.BINARY SEARCH \n 4.EXIT \n5.FIBONACCI SEARCH"))
+            if chc==4:
                 break
-            elif chc==1:
-                print(info.LinearSearch())
-            elif chc==2:
-                print(info.SentinelSeaech())
-            elif chc==3:
-                print(info.BinarySearch())
-            elif chc==4:
-                print(info.FibonacciSearch())
-
-
-        
-
-
-
-        
-
-
-
+            if chc==1:
+                print(info.linear_search())
+            if chc==2:
+                print(info.sentinal_search())
+            if chc==3:
+                print(info.binary_search())
+            if chc==5:
+                print(info.fibonaccci_Search())             
+                         
+            
             
 
-
-            
